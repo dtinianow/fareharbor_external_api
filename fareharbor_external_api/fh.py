@@ -1,5 +1,6 @@
 import requests
 import os
+import json
 
 class Service:
 
@@ -39,7 +40,32 @@ class Service:
     def get_availability_lodgings(self, shortname, pk):
         request = requests.get('%scompanies/%s/availabilities/%s/lodgings/' % (self.url, shortname, pk), params=self.payload)
         print request.text
-        
+
+    def post_booking(self, data):
+        raw_booking = self.format_booking_body(data)
+        booking = json.dumps(raw_booking)
+        request = requests.post('%scompanies/%s/availabilities/%s/bookings/' % (self.url, data['company_shortname'], data['pk']), data=booking, params=self.payload)
+        print request.text
+        # import code; code.interact(local=dict(globals(), **locals()))
+
+    def format_booking_body(self, data):
+        return {
+          'voucher_number': data['voucher_number'],
+          'contact': {
+            'name': data['name'],
+            'phone': data['phone'],
+            'email': data['email']
+          },
+          'customers': self.customer_types(data['customer_type_rates']),
+          'note': 'Optional booking note'
+        }
+
+    def customer_types(self, types):
+        for i in range(len(types)):
+            types[i] = {'customer_type_rate': types[i]}
+        return types
+
+
 x = Service()
 
 # x.get_companies()
@@ -52,7 +78,17 @@ x = Service()
 # x.get_booking('bodyglove', '85ab9e4c-03fd-4bd4-af67-4946aa426c79')
 # x.get_lodgings('bodyglove')
 # x.get_availability_lodgings('bodyglove', 70050)
-
+booking = {
+        'pk': 70043,
+        'company_shortname': 'bodyglove',
+        'name': 'John Doe',
+        'phone': '415-789-4563',
+        'email': 'johndoe@example.com',
+        'customer_type_rates': [149126, 149126],
+        'note': 'Optional booking note',
+        'voucher_number': 'VN-123456'
+}
+x.post_booking(booking)
 
 
 # import code; code.interact(local=dict(globals(), **locals()))
