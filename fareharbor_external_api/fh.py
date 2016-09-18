@@ -75,6 +75,8 @@ class Service:
         return types
 
 
+#### The code below can be used for testing each method:
+
 # x = Service()
 
 # x.get_companies()
@@ -100,6 +102,5 @@ class Service:
 # x.post_booking(booking)
 # x.post_verify_booking(booking)
 # x.delete_booking('bodyglove', '6e62d9e8-163b-446b-83d5-2e3f344100ae')
-
 
 # import code; code.interact(local=dict(globals(), **locals()))
