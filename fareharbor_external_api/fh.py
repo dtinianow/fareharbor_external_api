@@ -21,13 +21,15 @@ class Service:
         print request.text
 
     def get_availabilities_by_date_range(self, shortname, data):
-        request = requests.get('%scompanies/%s/items/%s/minimal/availabilities/date-range/%s/%s/' % (self.url, shortname, data[:pk], data[:start_date], data[:end_date]), params=self.payload)
+        request = requests.get('%scompanies/%s/items/%s/minimal/availabilities/date-range/%s/%s/' % (self.url, shortname, data['pk'], data['start_date'], data['end_date']), params=self.payload)
         print request.text
 
 
 x = Service()
 # x.get_companies()
 # x.get_items('bodyglove')
-data = {'pk': 1108, 'date': '2016-11-14'}
+data_1 = {'pk': 1108, 'date': '2016-11-14'}
+x.get_availabilities_by_date('sharktourshawaii', data_1)
 # import code; code.interact(local=dict(globals(), **locals()))
-x.get_availabilities_by_date('sharktourshawaii', data)
+data_2 = {'pk': 1108, 'start_date': '2016-11-14', 'end_date': '2016-11-17'}
+x.get_availabilities_by_date_range('sharktourshawaii', data_2)
