@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import patch
 
 def fun(x):
     return x + 1
