@@ -10,43 +10,52 @@ class Service:
     payload = {'api-app': api_app_key, 'api-user': api_user_key}
 
     def get_companies(self):
-        request = requests.get('%scompanies/' % self.url, params=self.payload)
-        print request.text
+        response = requests.get('%scompanies/' % self.url, params=self.payload)
+        print response.text
 
     def get_items(self, shortname):
-        request = requests.get('%scompanies/%s/items/' % (self.url, shortname), params=self.payload)
-        print request.text
+        response = requests.get('%scompanies/%s/items/' % (self.url, shortname), params=self.payload)
+        print response.text
 
     def get_availabilities_by_date(self, shortname, data):
-        request = requests.get('%scompanies/%s/items/%s/minimal/availabilities/date/%s/' % (self.url, shortname, data['pk'], data['date']), params=self.payload)
-        print request.text
+        response = requests.get('%scompanies/%s/items/%s/minimal/availabilities/date/%s/' % (self.url, shortname, data['pk'], data['date']), params=self.payload)
+        print response.text
 
     def get_availabilities_by_date_range(self, shortname, data):
-        request = requests.get('%scompanies/%s/items/%s/minimal/availabilities/date-range/%s/%s/' % (self.url, shortname, data['pk'], data['start_date'], data['end_date']), params=self.payload)
-        print request.text
+        response = requests.get('%scompanies/%s/items/%s/minimal/availabilities/date-range/%s/%s/' % (self.url, shortname, data['pk'], data['start_date'], data['end_date']), params=self.payload)
+        print response.text
 
     def get_availability(self, shortname, pk):
-        request = requests.get('%scompanies/%s/availabilities/%s/' % (self.url, shortname, pk), params=self.payload)
-        print request.text
+        response = requests.get('%scompanies/%s/availabilities/%s/' % (self.url, shortname, pk), params=self.payload)
+        print response.text
 
     def get_booking(self, shortname, uuid):
-        request = requests.get('%scompanies/%s/bookings/%s/' % (self.url, shortname, uuid), params=self.payload)
-        print request.text
+        response = requests.get('%scompanies/%s/bookings/%s/' % (self.url, shortname, uuid), params=self.payload)
+        print response.text
 
     def get_lodgings(self, shortname):
-        request = requests.get('%scompanies/%s/lodgings/' % (self.url, shortname), params=self.payload)
-        print request.text
+        response = requests.get('%scompanies/%s/lodgings/' % (self.url, shortname), params=self.payload)
+        print response.text
 
     def get_availability_lodgings(self, shortname, pk):
-        request = requests.get('%scompanies/%s/availabilities/%s/lodgings/' % (self.url, shortname, pk), params=self.payload)
-        print request.text
+        response = requests.get('%scompanies/%s/availabilities/%s/lodgings/' % (self.url, shortname, pk), params=self.payload)
+        print response.text
 
     def post_booking(self, data):
         raw_booking = self.format_booking_body(data)
         booking = json.dumps(raw_booking)
-        request = requests.post('%scompanies/%s/availabilities/%s/bookings/' % (self.url, data['company_shortname'], data['pk']), data=booking, params=self.payload)
-        print request.text
-        # import code; code.interact(local=dict(globals(), **locals()))
+        response = requests.post('%scompanies/%s/availabilities/%s/bookings/' % (self.url, data['company_shortname'], data['pk']), data=booking, params=self.payload)
+        print response.text
+
+    def post_verify_booking(self, data):
+        raw_booking = self.format_booking_body(data)
+        booking = json.dumps(raw_booking)
+        response = requests.post('%scompanies/%s/availabilities/%s/bookings/validate/' % (self.url, data['company_shortname'], data['pk']), data=booking, params=self.payload)
+        print response.text
+
+    def delete_booking(self, shortname, uuid):
+        response = requests.delete('%scompanies/%s/bookings/%s/' % (self.url, shortname, uuid), params=self.payload)
+        print response.text
 
     def format_booking_body(self, data):
         return {
@@ -66,7 +75,7 @@ class Service:
         return types
 
 
-x = Service()
+# x = Service()
 
 # x.get_companies()
 # x.get_items('bodyglove')
@@ -78,17 +87,19 @@ x = Service()
 # x.get_booking('bodyglove', '85ab9e4c-03fd-4bd4-af67-4946aa426c79')
 # x.get_lodgings('bodyglove')
 # x.get_availability_lodgings('bodyglove', 70050)
-booking = {
-        'pk': 70043,
-        'company_shortname': 'bodyglove',
-        'name': 'John Doe',
-        'phone': '415-789-4563',
-        'email': 'johndoe@example.com',
-        'customer_type_rates': [149126, 149126],
-        'note': 'Optional booking note',
-        'voucher_number': 'VN-123456'
-}
-x.post_booking(booking)
+# booking = {
+#         'pk': 70043,
+#         'company_shortname': 'bodyglove',
+#         'name': 'John Doe',
+#         'phone': '415-789-4563',
+#         'email': 'johndoe@example.com',
+#         'customer_type_rates': [149126, 149126],
+#         'note': 'Optional booking note',
+#         'voucher_number': 'VN-123456'
+# }
+# x.post_booking(booking)
+# x.post_verify_booking(booking)
+# x.delete_booking('bodyglove', '6e62d9e8-163b-446b-83d5-2e3f344100ae')
 
 
 # import code; code.interact(local=dict(globals(), **locals()))
