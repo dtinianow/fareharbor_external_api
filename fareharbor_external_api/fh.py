@@ -9,7 +9,7 @@ class Service:
     payload = {'api-app': api_app_key, 'api-user': api_user_key}
 
     def get_companies(self):
-        request = requests.get("%scompanies/?api-app=%s&api-user=%s" % (self.url, self.api_app_key, self.api_user_key))
+        request = requests.get(self.url + 'companies/', params=self.payload)
         print request.text
 
 x = Service()
