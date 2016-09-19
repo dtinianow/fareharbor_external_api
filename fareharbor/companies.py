@@ -11,7 +11,7 @@ class Companies(FareHarborService):
         #     print companies[i]
 
 x = Companies()
-x.all()
+print x.all()
 
 # class Companies(FareHarborService):
 #
