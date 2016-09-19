@@ -4,10 +4,11 @@ import json
 
 class FareHarborService:
 
-    url = 'https://demo.fareharbor.com/api/external/v1/'
-    api_app_key = os.environ['FAREHARBOR_API_APP_KEY']
-    api_user_key = os.environ['FAREHARBOR_API_USER_KEY']
-    payload = {'api-app': api_app_key, 'api-user': api_user_key}
+    def __init__(self):
+        self.url = 'https://demo.fareharbor.com/api/external/v1/'
+        self.api_app_key = os.environ['FAREHARBOR_API_APP_KEY']
+        self.api_user_key = os.environ['FAREHARBOR_API_USER_KEY']
+        self.payload = {'api-app': self.api_app_key, 'api-user': self.api_user_key}
 
     def get_companies(self):
         response = requests.get('%scompanies/' % self.url, params=self.payload)
@@ -77,9 +78,9 @@ class FareHarborService:
 
 #### The code below can be used for testing each method:
 
-# x = Service()
+x = FareHarborService()
 
-# x.get_companies()
+x.get_companies()
 # x.get_items('bodyglove')
 # data_1 = {'pk': 1108, 'date': '2016-11-14'}
 # x.get_availabilities_by_date('sharktourshawaii', data_1)
