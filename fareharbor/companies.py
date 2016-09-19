@@ -1,6 +1,5 @@
 from fare_harbor_service import FareHarborService
 from company import Company
-import json
 
 class Companies:
 
