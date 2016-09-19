@@ -21,7 +21,7 @@ class FareHarborService:
 
     def get_items(self, shortname):
         response = requests.get('%scompanies/%s/items/' % (self.url, shortname), params=self.payload)
-        return response.json()['items']
+        return response.json()
 
     def get_availabilities_by_date(self, shortname, data):
         response = requests.get('%scompanies/%s/items/%s/minimal/availabilities/date/%s/' % (self.url, shortname, data['pk'], data['date']), params=self.payload)
@@ -41,7 +41,7 @@ class FareHarborService:
 
     def get_lodgings(self, shortname):
         response = requests.get('%scompanies/%s/lodgings/' % (self.url, shortname), params=self.payload)
-        return response.json()['lodgings']
+        return response.json()
 
     def get_availability_lodgings(self, shortname, pk):
         response = requests.get('%scompanies/%s/availabilities/%s/lodgings/' % (self.url, shortname, pk), params=self.payload)
