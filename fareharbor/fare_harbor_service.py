@@ -4,6 +4,11 @@ import json
 
 class FareHarborService:
 
+    # url = 'https://demo.fareharbor.com/api/external/v1/'
+    # api_app_key = os.environ['FAREHARBOR_API_APP_KEY']
+    # api_user_key = os.environ['FAREHARBOR_API_USER_KEY']
+    # payload = {'api-app': api_app_key, 'api-user': api_user_key}
+
     def __init__(self):
         self.url = 'https://demo.fareharbor.com/api/external/v1/'
         self.api_app_key = os.environ['FAREHARBOR_API_APP_KEY']
@@ -12,51 +17,51 @@ class FareHarborService:
 
     def get_companies(self):
         response = requests.get('%scompanies/' % self.url, params=self.payload)
-        print response.text
+        print response.json()
 
     def get_items(self, shortname):
         response = requests.get('%scompanies/%s/items/' % (self.url, shortname), params=self.payload)
-        print response.text
+        print response.json()
 
     def get_availabilities_by_date(self, shortname, data):
         response = requests.get('%scompanies/%s/items/%s/minimal/availabilities/date/%s/' % (self.url, shortname, data['pk'], data['date']), params=self.payload)
-        print response.text
+        print response.json()
 
     def get_availabilities_by_date_range(self, shortname, data):
         response = requests.get('%scompanies/%s/items/%s/minimal/availabilities/date-range/%s/%s/' % (self.url, shortname, data['pk'], data['start_date'], data['end_date']), params=self.payload)
-        print response.text
+        print response.json()
 
     def get_availability(self, shortname, pk):
         response = requests.get('%scompanies/%s/availabilities/%s/' % (self.url, shortname, pk), params=self.payload)
-        print response.text
+        print response.json()
 
     def get_booking(self, shortname, uuid):
         response = requests.get('%scompanies/%s/bookings/%s/' % (self.url, shortname, uuid), params=self.payload)
-        print response.text
+        print response.json()
 
     def get_lodgings(self, shortname):
         response = requests.get('%scompanies/%s/lodgings/' % (self.url, shortname), params=self.payload)
-        print response.text
+        print response.json()
 
     def get_availability_lodgings(self, shortname, pk):
         response = requests.get('%scompanies/%s/availabilities/%s/lodgings/' % (self.url, shortname, pk), params=self.payload)
-        print response.text
+        print response.json()
 
     def post_booking(self, data):
         raw_booking = self.format_booking_body(data)
         booking = json.dumps(raw_booking)
         response = requests.post('%scompanies/%s/availabilities/%s/bookings/' % (self.url, data['company_shortname'], data['pk']), data=booking, params=self.payload)
-        print response.text
+        print response.json()
 
     def post_verify_booking(self, data):
         raw_booking = self.format_booking_body(data)
         booking = json.dumps(raw_booking)
         response = requests.post('%scompanies/%s/availabilities/%s/bookings/validate/' % (self.url, data['company_shortname'], data['pk']), data=booking, params=self.payload)
-        print response.text
+        print response.json()
 
     def delete_booking(self, shortname, uuid):
         response = requests.delete('%scompanies/%s/bookings/%s/' % (self.url, shortname, uuid), params=self.payload)
-        print response.text
+        print response.json()
 
     def format_booking_body(self, data):
         return {
@@ -78,9 +83,9 @@ class FareHarborService:
 
 #### The code below can be used for testing each method:
 
-x = FareHarborService()
-
-x.get_companies()
+# x = FareHarborService()
+#
+# x.get_companies()
 # x.get_items('bodyglove')
 # data_1 = {'pk': 1108, 'date': '2016-11-14'}
 # x.get_availabilities_by_date('sharktourshawaii', data_1)
