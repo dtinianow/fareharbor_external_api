@@ -83,11 +83,9 @@ class FareHarborService:
 
 #### The code below can be used for testing each method:
 
-x = FareHarborService()
-
-z = x.get_companies()
-print z['companies']
-
+# x = FareHarborService()
+#
+# x.get_companies()
 # x.get_items('bodyglove')
 # data_1 = {'pk': 1108, 'date': '2016-11-14'}
 # x.get_availabilities_by_date('sharktourshawaii', data_1)
