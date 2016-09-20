@@ -11,7 +11,6 @@ class Company:
         self.name = company['name']
         self.shortname = company['shortname']
 
-
     def items(self):
         raw_items = FareHarborService().get_items(self.shortname)
         items_data = raw_items['items']
