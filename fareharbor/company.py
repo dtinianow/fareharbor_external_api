@@ -5,7 +5,7 @@ from booking import Booking
 from lodging import Lodging
 from verification import Verification
 
-class Company:
+class Company(object):
 
     def __init__(self, company):
         self.name = company['name']

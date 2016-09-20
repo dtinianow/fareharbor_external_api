@@ -1,7 +1,7 @@
 from fare_harbor_service import FareHarborService
 from company import Company
 
-class Companies:
+class Companies(object):
 
     def all(self):
         raw_data = FareHarborService().get_companies()

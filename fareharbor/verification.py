@@ -1,5 +1,5 @@
-class Verification:
-    
+class Verification(object):
+
     def __init__(self, verification):
         self.invoice_price    = verification['invoice_price']
         self.receipt_taxes    = verification['receipt_taxes']

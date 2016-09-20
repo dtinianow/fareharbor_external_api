@@ -1,4 +1,4 @@
-class Item:
+class Item(object):
 
     def __init__(self, item):
         self.image_cdn_url                 = item['image_cdn_url']

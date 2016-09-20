@@ -1,5 +1,5 @@
-class Booking:
-    
+class Booking(object):
+
     def __init__(self, booking):
         self.display_id          = booking['display_id']
         self.status              = booking['status']

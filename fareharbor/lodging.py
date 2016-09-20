@@ -1,5 +1,5 @@
-class Lodging:
-    
+class Lodging(object):
+
     def __init__(self, lodging):
         self.name            = lodging['name']
         self.is_self_lodging = lodging['is_self_lodging']
