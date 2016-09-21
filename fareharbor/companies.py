@@ -6,9 +6,10 @@ class Companies(object):
     @classmethod
     def all(cls):
         raw_data = FareHarborService().get_companies()
-        companies_data = raw_data['companies']
-        return [ Company(i) for i in companies_data ]
+        company_data = raw_data['companies']
+        return [ Company(i) for i in company_data ]
 
-    def find(self, shortname):
-        companies = self.all()
-        return next(company for company in companies if company.shortname == shortname)
+    @classmethod
+    def find(cls, shortname):
+        companies = cls.all()
+        print next(company for company in companies if company.shortname == shortname)
