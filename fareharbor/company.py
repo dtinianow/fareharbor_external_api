@@ -14,25 +14,19 @@ class Company(object):
     def items(self):
         raw_items = FareHarborService().get_items(self.shortname)
         items_data = raw_items['items']
-        items = []
-        for i in items_data:
-            items.append(Item(i))
+        items = [ Item(i) for i in items_data ]
         return items
 
     def availabilities_by_date(self, data):
         raw_availabilities = FareHarborService().get_availabilities_by_date(self.shortname, data)
         availabilities_data = raw_availabilities['availabilities']
-        availabilities = []
-        for i in availabilities_data:
-            availabilities.append(Availability(i))
+        availabilities = [ Availability(i) for i in availabilities_data ]
         return availabilities
 
     def availabilities_by_date_range(self, data):
         raw_availabilities = FareHarborService().get_availabilities_by_date_range(self.shortname, data)
         availabilities_data = raw_availabilities['availabilities']
-        availabilities = []
-        for i in availabilities_data:
-            availabilities.append(Availability(i))
+        availabilities = [ Availability(i) for i in availabilities_data ]
         return availabilities
 
     def availability(self, pk):
@@ -48,17 +42,13 @@ class Company(object):
     def lodgings(self):
         raw_lodgings = FareHarborService().get_lodgings(self.shortname)
         lodgings_data = raw_lodgings['lodgings']
-        lodgings = []
-        for i in lodgings_data:
-            lodgings.append(Lodging(i))
+        lodgings = [ Lodging(i) for i in lodgings_data ]
         return lodgings
 
     def availability_lodgings(self, pk):
         raw_lodgings = FareHarborService().get_availability_lodgings(self.shortname, pk)
         lodgings_data = raw_lodgings['lodgings']
-        lodgings = []
-        for i in lodgings_data:
-            lodgings.append(Lodging(i))
+        lodgings = [ Lodging(i) for i in lodgings_data ]
         return lodgings
 
     def create_booking(self, booking_request):
@@ -75,8 +65,9 @@ class Company(object):
         cancelled_booking = raw_cancelled_booking['booking']
         return Booking(cancelled_booking)
 
-# a = Company({'name': 'Body Glove', 'shortname': 'bodyglove'}).items()
+a = Company({'name': 'Body Glove', 'shortname': 'bodyglove'}).items()
 # b = Company({'name': 'North Shore Shark Adventures', 'shortname': 'sharktourshawaii'}).availabilities_by_date({'pk': 1108, 'date': '2016-11-14'})
+
 # c = Company({'name': 'North Shore Shark Adventures', 'shortname': 'sharktourshawaii'}).availabilities_by_date_range({'pk': 1108, 'start_date': '2016-11-14', 'end_date': '2016-11-17'})
 # d = Company({'name': 'Body Glove', 'shortname': 'bodyglove'}).availability(70050)
 # e = Company({'name': 'Body Glove', 'shortname': 'bodyglove'}).booking('85ab9e4c-03fd-4bd4-af67-4946aa426c79')
