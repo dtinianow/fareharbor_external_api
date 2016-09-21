@@ -8,8 +8,8 @@ from verification import Verification
 class Company(object):
 
     def __init__(self, company):
-        self.name = company['name']
-        self.shortname = company['shortname']
+        for key in company:
+            setattr(self, key, company[key])
 
     def items(self):
         raw_items = FareHarborService().get_items(self.shortname)
@@ -65,9 +65,9 @@ class Company(object):
         cancelled_booking = raw_cancelled_booking['booking']
         return Booking(cancelled_booking)
 
-a = Company({'name': 'Body Glove', 'shortname': 'bodyglove'}).items()
-# b = Company({'name': 'North Shore Shark Adventures', 'shortname': 'sharktourshawaii'}).availabilities_by_date({'pk': 1108, 'date': '2016-11-14'})
 
+# a = Company({'name': 'Body Glove', 'shortname': 'bodyglove'}).items()
+# b = Company({'name': 'North Shore Shark Adventures', 'shortname': 'sharktourshawaii'}).availabilities_by_date({'pk': 1108, 'date': '2016-11-14'})
 # c = Company({'name': 'North Shore Shark Adventures', 'shortname': 'sharktourshawaii'}).availabilities_by_date_range({'pk': 1108, 'start_date': '2016-11-14', 'end_date': '2016-11-17'})
 # d = Company({'name': 'Body Glove', 'shortname': 'bodyglove'}).availability(70050)
 # e = Company({'name': 'Body Glove', 'shortname': 'bodyglove'}).booking('85ab9e4c-03fd-4bd4-af67-4946aa426c79')
