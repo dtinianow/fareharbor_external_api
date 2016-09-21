@@ -14,8 +14,7 @@ class Company(object):
     def items(self):
         raw_items = FareHarborService().get_items(self.shortname)
         items_data = raw_items['items']
-        items = [ Item(i) for i in items_data ]
-        return items
+        return [ Item(i) for i in items_data ]
 
     def availabilities_by_date(self, data):
         raw_availabilities = FareHarborService().get_availabilities_by_date(self.shortname, data)
