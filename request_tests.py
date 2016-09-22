@@ -1,10 +1,10 @@
-from fareharbor.fare_harbor_service import FareHarborService
+from fareharbor.request import Request
 import unittest
 
 
-class FareHarborServiceTest(unittest.TestCase):
+class RequestTest(unittest.TestCase):
     def setUp(self):
-        self.service = FareHarborService()
+        self.service = Request()
 
     def test_gets_companies(self):
         self.assertEqual(self.service.get_companies(),
@@ -91,7 +91,7 @@ class FareHarborServiceTest(unittest.TestCase):
 
 def suite():
     test_suite = unittest.TestSuite()
-    test_suite.addTest(unittest.makeSuite(FareHarborServiceTest))
+    test_suite.addTest(unittest.makeSuite(RequestTest))
     return test_suite
 
 mySuite = suite()
